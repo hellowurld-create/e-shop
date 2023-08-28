@@ -54,7 +54,7 @@ export default function TopMenu () {
                         <li className="px-3 hover:underline cursor-pointer">
                             <div className="relative">
                                 <AiOutlineShoppingCart size={20} />
-                                <div className="absolute text-[10px] -top-[2px] -right-[5px] bg-red-500 w-[14px] h-[14px] rounded-full text-white">
+                                <div className="absolute text-[10px] -top-[2px] -right-[5px] bg-[#C70039] w-[14px] h-[14px] rounded-full text-white">
                                     <div className="flex items-center justify-center -mt-[1px]">3</div>
                                 </div>
                             </div>

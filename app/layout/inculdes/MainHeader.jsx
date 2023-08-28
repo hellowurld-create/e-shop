@@ -32,7 +32,7 @@ export default function MainHeader () {
                                                 />
                                         </div>
 
-                                        <button className=" flex items-center bg-orange-700 text-sm rounded-md font-semibold text-white p-[11px] ml-1 px-14">
+                                        <button className=" flex items-center bg-[#C70039] text-sm rounded-md font-semibold text-white p-[11px] ml-1 px-14">
                                             Search
                                         </button>
                                         <div className="text-xs px-2 hover:text-orange-600 cursor-pointer">Advanced</div>
