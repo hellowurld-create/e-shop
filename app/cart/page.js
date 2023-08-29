@@ -26,7 +26,7 @@ export default function Cart() {
 
                         <div id="GoToCheckout" className="md:w-[33%] absolute top-0 right-0 m-2">
                             <div className="bg-white p-4 border">
-                                <button className="flex items-center justify-center bg-orange-500 w-full text-white font-semibold p-3 rounded-md mt-4">
+                                <button className="flex items-center justify-center bg-[#C70039] w-full text-white font-semibold p-3 rounded-full mt-4">
                                         Go To Checkout
                                 </button>
 
