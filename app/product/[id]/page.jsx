@@ -1,9 +1,14 @@
 "use client"
 
+import { useCart } from "@/app/context/cart"
 import MainLayout from "@/app/layout/MainLayout"
+import { toast } from 'react-toastify'
 import SimilarProducts from '../../components/SimilarProducts'
 
 export default function Product({ params }) {
+
+    const cart = useCart()
+
     const product =
     {
         id: 1,
@@ -44,8 +49,21 @@ export default function Product({ params }) {
                                                 US ${(product?.price / 100).toFixed(2)}
                                             </div> : null}
                                     </div>
-                                    <button className="bg-[#C70039] text-white py-2 px-20 rounded-md cursor-pointer">
-                                        Add To Cart
+                                    <button
+                                        onClick={() => {
+                                            if (cart.isItemAdded) {
+                                                cart.removeFromCart(product)
+                                                toast.info('Removed from cart', {autoClose: 3000})
+                                            }
+                                            else {
+                                                cart.addToCart(product)
+                                                toast.success('Added to cart', {autoClose:3000})
+                                            }
+                                        }}
+                                        className={`bg-[#C70039] text-white py-2 px-20 rounded-md cursor-pointer
+                                    ${cart.isItemAdded ? 'bg-orange-400 hover:bg-orange-300': 'bg-[#C70039] hover:bg-[#ba4f6d]' }
+                                    `}>
+                                        {cart.isItemAdded ? 'Remove From Cart' : 'Add To Cart'}
                                     </button>
                                     </div>
                             </div>

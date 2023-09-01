@@ -1,14 +1,13 @@
 "use client"
 
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { createContext, useState, useEffect, useContext } from "react";
 import { useRouter } from "next/navigation";
-import { createContext, useContext, useEffect, useState } from "react";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
 
 const Context = createContext();
 
 const Provider = ({ children }) => {
-const router = useRouter();
-const supabaseClient = createClientComponentClient()
+  const router = useRouter();
 
   const [user, setUser] = useState(null);
   const [id, setId] = useState(null);
@@ -16,6 +15,7 @@ const supabaseClient = createClientComponentClient()
   const [name, setName] = useState(null);
   const [picture, setPicture] = useState(null);
 
+  const supabaseClient = createClientComponentClient()
 
   const getCurrentSession = async () => {
     const res = await supabaseClient.auth.getSession()

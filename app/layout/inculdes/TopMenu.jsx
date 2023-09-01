@@ -1,12 +1,12 @@
 "use client"
 
 
-import { useUser } from "@/app/context/user"
 import Link from "next/link"
 import { useState } from "react"
 import { AiOutlineShoppingCart } from 'react-icons/ai'
 import { BsChevronDown } from 'react-icons/bs'
 import { useCart } from "../../context/cart"
+import { useUser } from "../../context/user"
 
 export default function TopMenu() {
     const user = useUser();
@@ -15,6 +15,7 @@ export default function TopMenu() {
     const [isMenu, setIsMenu] = useState(false)
 
 
+   
     const isLoggedIn = () => {
         if (user && user?.id) {
             return (
@@ -36,46 +37,57 @@ export default function TopMenu() {
         )
     }
 
-
     return (
         <>
             <div id="TopMenu" className="border-b">
-                <div className="flex items-center justify-center justify-between w-full mx-auto max-w-[1200px]">
-                    <ul
+                <div className="flex items-center justify-between w-full mx-auto max-w-[1200px]">
+                    <ul 
                         id="TopMenuLeft"
                         className="flex items-center text-[11px] text-[#333333] px-2 h-8"
                     >
                         <li className="relative px-3">
-                        {isLoggedIn()}
-                        <div 
+
+                            {isLoggedIn()}
+
+                            <div 
                                 id="AuthDropdown" 
                                 className={`
-                                    absolute visible bg-white w-[200px] text-[#333333] z-40 top-[20px] left-0 border shadow-lg
+                                    absolute bg-white w-[200px] text-[#333333] z-40 top-[20px] left-0 border shadow-lg
                                     ${isMenu ? 'visible' : 'hidden'}
                                 `}
                             >
-                                <div className="flex items-center justify-center justify-start gap-1 p-3">
-                                    <img width={50} src={user?.picture} alt="profile image" />
-                                    <div className="font-bold text-[13px]">{user?.name}</div>
+                                <div>
+                                    <div className="flex items-center justify-start gap-1 p-3">
+                                        <img width={50} src={user?.picture} />
+                                        <div className="font-bold text-[13px]">{user?.name}</div>
+                                    </div>
                                 </div>
-                                <div className="border-b">
-                                    <ul className="bg-white">
-                                        <li className="text-[11px] py-2 px-4 w-full hover:underline text-orange-400 hover:text-orange-700 cursor-pointer">
-                                            <Link href="orders">
-                                                My Orders
-                                            </Link>
-                                        </li>
-                                        <li
-                                            onClick={() => { user.signOut(); setIsMenu(false)}}
-                                            className="text-[11px] py-2 px-4 w-full hover:underline text-orange-400 hover:text-orange-700 cursor-pointer">
-                                                Sign out
-                                        </li>
-                                    </ul>
-                                </div>
+                                
+                                <div className="border-b"/>
+
+                                <ul className="bg-white">
+                                    <li className="text-[11px] py-2 px-4 w-full hover:underline text-blue-500 hover:text-blue-600 cursor-pointer">
+                                        <Link href="/orders">
+                                            My orders
+                                        </Link>
+                                    </li>
+                                    <li 
+                                        onClick={() => { user.signOut(); setIsMenu(false) }} 
+                                        className="text-[11px] py-2 px-4 w-full hover:underline text-blue-500 hover:text-blue-600 cursor-pointer"
+                                    >
+                                        Sign out
+                                    </li>
+                                </ul>
+                                
                             </div>
                         </li>
-                        <li className="px-3 hover:underline cursor-pointer">Daily Deals</li>
-                        <li className="px-3 hover:underline cursor-pointer">Help & Contact</li>
+                        <li className="px-3 hover:underline cursor-pointer">
+                            Daily Deals
+                        </li>
+                        <li className="px-3 hover:underline cursor-pointer">
+                            Help & Contact
+                        </li>
+                        
                     </ul>
 
                     <ul id="topMenuRight"
@@ -89,11 +101,13 @@ export default function TopMenu() {
                             <div className="relative">
                                 <AiOutlineShoppingCart size={20} />
 
-                                {cart.cartCount() > 0}
-
+                                {cart.cartCount() > 0 ?
                                 <div className="absolute text-[10px] -top-[2px] -right-[5px] bg-[#C70039] w-[14px] h-[14px] rounded-full text-white">
-                                    <div className="flex items-center justify-center -mt-[1px]">3</div>
-                                </div>
+                                        <div className="flex items-center justify-center -mt-[1px]">{ cart.cartCount() }</div>
+                            </div>
+                            : <div></div>}
+
+                                
                             </div>
                         </li>
                     </ul>
