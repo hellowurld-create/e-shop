@@ -205,7 +205,7 @@ export default function Home() {
                                 font-semibold 
                                 p-3 
                                 rounded
-                                ${isUpdatingAddress ? 'bg-blue-800' : 'bg-blue-600'}
+                                ${isUpdatingAddress ? 'bg-orange-800' : 'bg-orange-600'}
                             `}
                         >
                             {!isUpdatingAddress

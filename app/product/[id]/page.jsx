@@ -1,22 +1,32 @@
 "use client"
 
 import { useCart } from "@/app/context/cart"
+import useIsLoading from "@/app/hooks/useIsLoading"
 import MainLayout from "@/app/layout/MainLayout"
+import { useEffect, useState } from "react"
 import { toast } from 'react-toastify'
 import SimilarProducts from '../../components/SimilarProducts'
 
 export default function Product({ params }) {
 
     const cart = useCart()
+    const [product, setProduct] = useState({})
 
-    const product =
-    {
-        id: 1,
-        title: "Brown Leather Bag",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Praesent tristique magna sit amet purus gravida quis blandit. Lacus vel facilisis volutpat est velit. Maecenas volutpat blandit aliquam etiam erat.",
-        url: "https://picsum.photos/id/20",
-        price: 2500
-    }
+    const getProduct = async () => {
+        useIsLoading(true)
+        setProduct({})
+    
+        const response = await fetch(`/api/product/${params.id}`)
+        const prod = await response.json()
+        setProduct(prod)
+        cart.isItemAddedToCart(prod)
+        useIsLoading(false)
+    
+      }
+
+    useEffect(() => {
+        getProduct()
+    }, [])
     
     return (
         <>
