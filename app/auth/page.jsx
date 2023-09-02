@@ -24,7 +24,7 @@ export default function AuthPage() {
 
             <div className="max-w-[400px] mx-auto px-2">
                 <Auth
-                    onlyThirdPartyProviders
+                    
                     redirectTo="http://localhost:3000//auth/callback"
                     supabaseClient={supabase}
                     providers={['google']}

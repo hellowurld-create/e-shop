@@ -2,17 +2,17 @@
 
 // https://nextjs.org/docs/messages/react-hydration-error#solution-1-using-useeffect-to-run-on-the-client-only
 
-import MainLayout from "../layout/MainLayout"
-import TextInput from "../components/TextInput"
-import { useEffect, useState } from "react"
 import { useUser } from "@/app/context/user"
 import useIsLoading from "@/app/hooks/useIsLoading"
+import { useRouter } from "next/navigation"
+import { useEffect, useState } from "react"
+import { AiOutlineLoading3Quarters } from "react-icons/ai"
+import { toast } from 'react-toastify'
+import ClientOnly from "../components/ClientOnly"
+import TextInput from "../components/TextInput"
 import useCreateAddress from "../hooks/useCreateAddress"
 import useUserAddress from "../hooks/useUserAddress"
-import { AiOutlineLoading3Quarters } from "react-icons/ai"
-import { useRouter } from "next/navigation"
-import { toast } from 'react-toastify';
-import ClientOnly from "../components/ClientOnly"
+import MainLayout from "../layout/MainLayout"
 
 export default function Home() {
     const router = useRouter()
@@ -34,7 +34,7 @@ export default function Home() {
         return ''
     }
 
-    const getAddress = async () => {
+    const getAdddress = async () => {
         if (user?.id == null || user?.id == undefined) {
             useIsLoading(false)
             return
@@ -52,7 +52,7 @@ export default function Home() {
 
     useEffect(() => {
         useIsLoading(true)
-        getAddress()
+        getAdddress()
     }, [user])
 
     const setTheCurrentAddress = (result) => {
@@ -205,7 +205,7 @@ export default function Home() {
                                 font-semibold 
                                 p-3 
                                 rounded
-                                ${isUpdatingAddress ? 'bg-orange-800' : 'bg-orange-6000'}
+                                ${isUpdatingAddress ? 'bg-blue-800' : 'bg-blue-600'}
                             `}
                         >
                             {!isUpdatingAddress
