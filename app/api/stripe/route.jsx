@@ -1,7 +1,7 @@
-import Stripe from 'stripe';
-import { NextResponse } from "next/server";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
+import { NextResponse } from "next/server";
+import Stripe from 'stripe';
 
 export async function POST(req) {
     const supabase = createServerComponentClient({ cookies })
@@ -16,7 +16,7 @@ export async function POST(req) {
 
         const res = await stripe.paymentIntents.create({
             amount: Number(body.amount),
-            currency: 'gbp',
+            currency: 'usd',
             automatic_payment_methods: { enabled: true },
         });
 
