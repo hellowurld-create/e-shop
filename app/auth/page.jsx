@@ -25,10 +25,11 @@ export default function AuthPage() {
             <div className="max-w-[400px] mx-auto px-2">
                 <Auth
                     
-                    redirectTo="http://localhost:3000//auth/callback"
+                    redirectTo={`${window.location.origin}/auth/callback`}
                     supabaseClient={supabase}
+                    magicLink = {true}
                     providers={['google']}
-                    appearance={{theme: ThemeSupa}}
+                    appearance={{ theme: ThemeSupa }}
                 />
             </div>
 
