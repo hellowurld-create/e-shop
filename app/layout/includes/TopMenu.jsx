@@ -1,21 +1,22 @@
-"use client"
+'use client'
 
-
-import Link from "next/link"
-import { useState } from "react"
-import { AiOutlineShoppingCart } from 'react-icons/ai'
-import { BsChevronDown } from 'react-icons/bs'
-import { useCart } from "../../context/cart"
-import { useUser } from "../../context/user"
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { AiOutlineShoppingCart } from 'react-icons/ai';
+import { BsChevronDown } from 'react-icons/bs';
+import ClientOnly from "../../components/ClientOnly";
+import { useCart } from "../../context/cart";
+import { useUser } from "../../context/user";
 
 export default function TopMenu() {
+    const router = useRouter()
     const user = useUser();
     const cart = useCart();
-
     const [isMenu, setIsMenu] = useState(false)
 
+    useEffect(() => { cart.cartCount() }, [cart])
 
-   
     const isLoggedIn = () => {
         if (user && user?.id) {
             return (
@@ -90,29 +91,33 @@ export default function TopMenu() {
                         
                     </ul>
 
-                    <ul id="topMenuRight"
+                    <ul 
+                        id="TopMenuRight"
                         className="flex items-center text-[11px] text-[#333333] px-2 h-8"
                     >
-                        <li className="flex items-center gap-2 px-3 hover:underline cursor-pointer">
-                            <img width={32} src="/images/uk.png" alt="" />
+                        <li 
+                            onClick={() => router.push('/address')} 
+                            className="flex items-center gap-2 px-3 hover:underline cursor-pointer"
+                        >
+                            <img width={32} src="/images/uk.png"/>
                             Ship to
                         </li>
-                        <li className="px-3 hover:underline cursor-pointer">
-                            <div className="relative">
-                                <AiOutlineShoppingCart size={20} />
-
-                                {cart.cartCount() > 0 ?
-                                <div className="absolute text-[10px] -top-[2px] -right-[5px] bg-[#C70039] w-[14px] h-[14px] rounded-full text-white">
-                                        <div className="flex items-center justify-center -mt-[1px]">{ cart.cartCount() }</div>
-                            </div>
-                            : <div></div>}
-
-                                
-                            </div>
-                        </li>
+                        <ClientOnly>
+                            <li className="px-3 hover:underline cursor-pointer">
+                                <div onClick={() => router.push('/cart')} className="relative">
+                                    <AiOutlineShoppingCart size={22}/>
+                                    {cart.cartCount() > 0 ?
+                                        <div className="absolute text-[10px] -top-[2px] -right-[5px] bg-red-500 w-[14px] h-[14px] rounded-full text-white">
+                                            <div className=" flex items-center justify-center -mt-[1px]">{cart.cartCount()}</div>
+                                        </div>
+                                    : <div></div>}
+                                </div>
+                            </li>
+                        </ClientOnly>
                     </ul>
                 </div>
-        </div>
+            </div>
         </>
     )
-}
+  }
+  

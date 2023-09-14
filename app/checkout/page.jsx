@@ -36,7 +36,7 @@ export default function Checkout() {
 
         useIsLoading(true)
 
-        const getAddress = async () => {
+        const getAdddress = async () => {
             if (user?.id == null || user?.id == undefined) {
                 useIsLoading(false)
                 return
@@ -48,7 +48,7 @@ export default function Checkout() {
             setIsLoadingAddress(false)
         }
 
-        getAddress()
+        getAdddress()
         setTimeout(() => stripeInit(), 300)
     }, [user])
 
@@ -150,7 +150,7 @@ export default function Checkout() {
 
                             <div>
                                 {!isLoadingAddress ?
-                                    <Link href="/address" className="text-orange-500 text-sm underline">
+                                    <Link href="/address" className="text-blue-500 text-sm underline">
                                         {addressDetails.name ? 'Update Address' : 'Add Address'}
                                     </Link>
                                 : null}
@@ -188,7 +188,7 @@ export default function Checkout() {
                             <div className="p-4">
                                 <div className="flex items-baseline justify-between text-sm mb-1">
                                     <div>Items ({cart.getCart().length})</div>
-                                    <div>${(cart.cartTotal() / 100).toFixed(2)}</div>
+                                    <div>£{(cart.cartTotal() / 100).toFixed(2)}</div>
                                 </div>
                                 <div className="flex items-center justify-between mb-4 text-sm">
                                     <div>Shipping:</div>
@@ -200,7 +200,7 @@ export default function Checkout() {
                                 <div className="flex items-center justify-between my-4">
                                     <div className="font-semibold">Order total</div>
                                     <div className="text-2xl font-semibold">
-                                        ${(cart.cartTotal() / 100).toFixed(2)}
+                                        £{(cart.cartTotal() / 100).toFixed(2)}
                                     </div>
                                 </div>
 
@@ -218,7 +218,7 @@ export default function Checkout() {
 
                                     <button 
                                         type="submit"
-                                        className="mt-4 bg-orange-600 text-lg w-full text-white font-semibold p-3 rounded-full"
+                                        className="mt-4 bg-[#C70039] text-lg w-full text-white font-semibold p-3 rounded-full"
                                     >
                                         <div>Confirm and pay</div>
                                     </button>
